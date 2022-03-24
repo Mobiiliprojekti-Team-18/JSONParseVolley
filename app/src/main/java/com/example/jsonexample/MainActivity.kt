@@ -30,19 +30,17 @@ class MainActivity : AppCompatActivity() {
         val tvName = findViewById<TextView>(R.id.tvMyTextView)
         val tvId = findViewById<TextView>(R.id.tvId)
         val tvAddress = findViewById<TextView>(R.id.tvAddress)
-        
+
         val queue = Volley.newRequestQueue(this)
         val request = StringRequest(Request.Method.GET,url,
             { response ->
                 //Haetaan koko JSOn array
                 val data = response.toString()
                 val jArray = JSONArray(data)
-                //Log.e("array", jArray.toString())
 
                 //Loopataan arraysta objektit
                 for (i in 0..jArray.length()-1){
                     val jObject = jArray.getJSONObject(i)
-                    //Log.e("jObject", jObject.toString())
 
                     //Erotellaan id, name, userName objectista
                     val id = jObject.getInt("id")
@@ -55,12 +53,6 @@ class MainActivity : AppCompatActivity() {
                     //Haetaan address objectista street ja city
                     val street = address.getString("street")
                     val city = address.getString("city")
-
-                    println("id: ${id}")
-                    println("name: ${name}")
-                    println("userName: ${username}")
-                    println("street: ${street}")
-                    println("city: ${city}")
 
                     //Asetetaan id, nimi ja osoite textviewiin
                     if (id == 1 ){
