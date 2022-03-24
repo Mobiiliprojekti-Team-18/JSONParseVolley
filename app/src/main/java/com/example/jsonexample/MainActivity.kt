@@ -41,17 +41,18 @@ class MainActivity : AppCompatActivity() {
                     val jObject = jArray.getJSONObject(i)
                     //Log.e("jObject", jObject.toString())
 
-                    //Erotellaan userId, id, title, body
+                    //Erotellaan id, name, userName
                     val id = jObject.getInt("id")
                     val name = jObject.getString("name")
                     val username = jObject.getString("username")
-                    Log.e("id", id.toString())
-                    Log.e("name", name.toString())
-                    Log.e("username", username.toString())
+
+                    println("id: ${id}")
+                    println("name: ${name}")
+                    println("userName: ${username}")
 
                     //Aseta nimi textviewiin
                     if (id == 1 ){
-                        tv.text = name
+                        tv.text = "Name: " + name
                     }
                 }
             }, {  })
