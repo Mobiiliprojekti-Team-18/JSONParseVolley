@@ -30,31 +30,31 @@ class MainActivity : AppCompatActivity() {
         val tv = findViewById<TextView>(R.id.tvMyTextView)
         val queue = Volley.newRequestQueue(this)
         val request = StringRequest(Request.Method.GET,url,
-            Response.Listener { response ->
+            { response ->
                 //Haetaan koko JSOn array
                 val data = response.toString()
-                var jArray = JSONArray(data)
+                val jArray = JSONArray(data)
                 //Log.e("array", jArray.toString())
 
                 //Loopataan arraysta objektit
                 for (i in 0..jArray.length()-1){
-                    var jObject = jArray.getJSONObject(i)
+                    val jObject = jArray.getJSONObject(i)
                     //Log.e("jObject", jObject.toString())
 
                     //Erotellaan userId, id, title, body
-                    var id = jObject.getInt("id")
-                    var name = jObject.getString("name")
-                    var username = jObject.getString("username")
+                    val id = jObject.getInt("id")
+                    val name = jObject.getString("name")
+                    val username = jObject.getString("username")
                     Log.e("id", id.toString())
                     Log.e("name", name.toString())
                     Log.e("username", username.toString())
 
                     //Aseta nimi textviewiin
-                    if (id == 9 ){
+                    if (id == 1 ){
                         tv.text = name
                     }
                 }
-            },Response.ErrorListener {  })
+            }, {  })
         queue.add(request)
     }
 }
