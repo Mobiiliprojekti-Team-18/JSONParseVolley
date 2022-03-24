@@ -21,16 +21,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val btn = findViewById<Button>(R.id.btn)
-        btn.setOnClickListener(View.OnClickListener{
+        btn.setOnClickListener{
            downloadTask()
-        })
+        }
     }
 
     fun downloadTask(){
         val tvName = findViewById<TextView>(R.id.tvMyTextView)
         val tvId = findViewById<TextView>(R.id.tvId)
         val tvAddress = findViewById<TextView>(R.id.tvAddress)
-
+        
         val queue = Volley.newRequestQueue(this)
         val request = StringRequest(Request.Method.GET,url,
             { response ->
@@ -49,8 +49,10 @@ class MainActivity : AppCompatActivity() {
                     val name = jObject.getString("name")
                     val username = jObject.getString("username")
 
-                    //Haetaan nested object
+                    //Haetaan nested object address
                     val address = jObject.getJSONObject("address")
+
+                    //Haetaan address objectista street ja city
                     val street = address.getString("street")
                     val city = address.getString("city")
 
@@ -60,14 +62,11 @@ class MainActivity : AppCompatActivity() {
                     println("street: ${street}")
                     println("city: ${city}")
 
-                    var idNumber = 1
-
-                    //Aseta nimi textviewiin
-                    if (id == idNumber ){
+                    //Asetetaan id, nimi ja osoite textviewiin
+                    if (id == 1 ){
                         tvId.text = "Id: " + id
                         tvName.text = "Name: " + name
                         tvAddress.text = "Address: " + street + " , " + city
-
                     }
                 }
             }, {  })
